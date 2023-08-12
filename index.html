@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Socket.IO</title>
+    <style>
+        .title {
+            text-align: center;
+        }
+
+        .body {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+
+        .container {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="title">System Monitor</h1>
+    <div class="body">
+        <div class="container">
+            <h3>Clock</h3>
+            <div id="clock"></div>
+        </div>
+        <div class="container">
+            <h3>CPU</h3>
+            <div id="cpu"></div>
+        </div>
+        <div class="container">
+            <h3>Memory</h3>
+            <div id="memory"></div>
+        </div>
+        <div class="container">
+            <h3>Disk</h3>
+            <div id="disk"></div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        var socket = io.connect('http://localhost:3000');
+        socket.on('connect', function (data) {
+            socket.emit('join', 'Hello world from client');
+        });
+        socket.on('clock', function (data) {
+            $('#clock').html(data.currentDate);
+        });
+        socket.on('memory', function (data) {
+            $('#memory').html(data.percentageMem + " %");
+        });
+        socket.on('cpu', function (data) {
+            $('#cpu').html(data.percentageCPU + " %");
+        });
+        socket.on('disk', function (data) {
+            $('#disk').html(data.percentageDisk + " %");
+        });
+    </script>
+</body>
+
+</html>
