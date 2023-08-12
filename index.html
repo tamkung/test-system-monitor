@@ -3,6 +3,7 @@
 
 <head>
     <title>Socket.IO</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     <style>
         .title {
             text-align: center;
@@ -23,6 +24,7 @@
             float: left;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 </head>
 
 <body>
@@ -45,7 +47,6 @@
             <div id="disk"></div>
         </div>
     </div>
-    <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
         var socket = io.connect('http://localhost:3000');
